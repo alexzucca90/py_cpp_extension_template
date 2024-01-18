@@ -43,7 +43,7 @@ class build_ext_with_args(build_ext):
 
         link_args = self.extra_link_args[compiler]
         for ext in self.extensions:
-            ext.extra_compile_args = link_args
+            ext.extra_link_args = link_args
 
         super().build_extensions()
 
