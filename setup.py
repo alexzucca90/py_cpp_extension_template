@@ -25,13 +25,13 @@ class build_ext_with_args(build_ext):
     """Add compiler-specific compile/link flags."""
 
     extra_compile_args = {
-        'msvc': ['/std:c++20'],
+        'msvc': ['/std:c++20', "/openmp"],
         'unix': ['-std=c++20', '-fopenmp'],
     }
 
     extra_link_args = {
-        'msvc': ['/std:c++20'],
-        'unix': ['-std=c++20', '-fopenmp'],
+        'msvc': ['/std:c++20', "/openmp"],
+        'unix': ['-std=c++20', "-fopenmp"],
     }
 
     def build_extensions(self):
@@ -49,6 +49,7 @@ class build_ext_with_args(build_ext):
 
 
 setup(
+    name="cpp_extension",
     cmdclass={'build_ext': build_ext_with_args},
     ext_modules=cythonize(
         [Extension('py_cpp_extension.cyutils',
